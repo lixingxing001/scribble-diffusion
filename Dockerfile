@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 9002
 
 # 运行应用程序
-CMD ["npm", "dev"]
+CMD ["npm", "run","dev"]
