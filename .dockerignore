@@ -1,2 +1,4 @@
 /app/node_modules
-!/app/node_modules/@eslint/eslintrc
+!/app/node_modules/@eslint
+/app/node_modules/@eslint/*
+!/app/node_modules/@eslint/eslintrc.js
