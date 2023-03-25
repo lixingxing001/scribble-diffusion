@@ -1,26 +1,23 @@
-# ---- Base Node ----
-FROM node:19-alpine AS base
+# 使用官方 Node.js 14 镜像作为基础镜像
+FROM node:14
+
+# 设置工作目录
 WORKDIR /app
+
+# 将 package.json 和 package-lock.json 复制到容器中
 COPY package*.json ./
 
-# ---- Dependencies ----
-FROM base AS dependencies
-RUN npm ci
+# 安装依赖
+RUN npm install
 
-# ---- Build ----
-FROM dependencies AS build
+# 将整个本地项目复制到容器中
+COPY . .
+
+# 打包应用程序
 RUN npm run build
 
-# ---- Production ----
-FROM node:19-alpine AS production
-WORKDIR /app
-COPY --from=dependencies /node_modules ./node_modules
-COPY --from=build /.next ./.next
-COPY --from=build /public ./public
-COPY --from=build /package*.json ./
-
-# Expose the port the app will run on
+# 暴露容器的 80 端口
 EXPOSE 9002
 
-# Start the application
-CMD ["npm", "start"]
+# 运行应用程序
+CMD ["npm", "dev"]
