@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # 将整个本地项目复制到容器中
-COPY . .
+COPY . /app
 
 # 打包应用程序
 RUN npm run build
