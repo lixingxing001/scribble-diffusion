@@ -9,16 +9,15 @@ RUN npm ci
 
 # ---- Build ----
 FROM dependencies AS build
-COPY . .
 RUN npm run build
 
 # ---- Production ----
 FROM node:19-alpine AS production
 WORKDIR /app
-COPY --from=dependencies /app/node_modules ./node_modules
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
-COPY --from=build /app/package*.json ./
+COPY --from=dependencies /node_modules ./node_modules
+COPY --from=build /.next ./.next
+COPY --from=build /public ./public
+COPY --from=build /package*.json ./
 
 # Expose the port the app will run on
 EXPOSE 9002
