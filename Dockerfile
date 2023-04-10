@@ -7,7 +7,7 @@ COPY .env.local /app
 
 RUN npm install
 
-COPY .
+COPY . .
 
 
 EXPOSE 3000
