@@ -2,8 +2,9 @@ FROM node:14 AS builder
 
 WORKDIR /app
 
-COPY ./package*.json /app
-COPY ./.env.local /app
+COPY package*.json ./
+COPY .env.local ./
+
 RUN npm install
 
 EXPOSE 3000
