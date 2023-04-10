@@ -3,6 +3,8 @@ FROM node:14 AS builder
 WORKDIR /app
 
 COPY package*.json ./
+COPY .env.example ./
+
 RUN npm install
 COPY . .
 
