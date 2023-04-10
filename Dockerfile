@@ -3,9 +3,10 @@ FROM node:14 AS builder
 WORKDIR /app
 
 COPY package*.json ./
-COPY .env.example ./
+COPY .env.local ./
 
 RUN npm install
+
 COPY . .
 
 EXPOSE 3000
