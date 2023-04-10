@@ -1,14 +1,16 @@
-FROM node:14 AS builder
+FROM node:lts-alpine AS frontend
+
+RUN npm install pnpm -g
 
 WORKDIR /app
 
-COPY package*.json /app
-COPY .env.local /app
+COPY ./package.json /app
 
-RUN npm install
+COPY ./pnpm-lock.yaml /app
 
-COPY . .
+RUN pnpm install
 
+COPY . /app
 
 EXPOSE 3000
 
